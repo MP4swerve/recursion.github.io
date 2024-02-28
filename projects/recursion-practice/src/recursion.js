@@ -51,11 +51,11 @@ var isEven = function(n) {
   // recursion
   if(n === 0){
     return true;
-  } else if(n === 1){
+  } else {
     return false;
-  } else{
-    return isEven(n -2);
   }
+  return isEven(n - 2);
+
 };
 
 // 5. Sum all integers below a given integer.
