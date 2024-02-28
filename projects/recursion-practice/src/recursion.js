@@ -43,14 +43,19 @@ var arraySum = function(array, output = 0) {
 };
 
 // 4. Check if a number is even.
-var isEven = function(n, even = 2) {
+var isEven = function(n) {
   // base
   if(typeof n !== 'number'){
     return undefined;
   }
   // recursion
-  n / even === 0;
-  return isEven(n, even)
+  if(n === 0){
+    return true;
+  } else if(n === 1){
+    return false;
+  } else{
+    return isEven(n -2);
+  }
 };
 
 // 5. Sum all integers below a given integer.
