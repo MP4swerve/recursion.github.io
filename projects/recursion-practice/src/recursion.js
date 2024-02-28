@@ -52,7 +52,8 @@ var isEven = function(n) {
     return true;
   }
   // recursion
-  return isEven(n - 2);
+  n -= 2
+  return isEven(n);
 };
 
 // 5. Sum all integers below a given integer.
