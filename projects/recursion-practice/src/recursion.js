@@ -10,8 +10,8 @@ var factorial = function(n, product = 1) {
     return product;
   }
   // recursion
-  n *= product;
-  return factorial(n - 1);
+  product *= n;
+  return factorial(n - 1, product);
 
 };
 
