@@ -8,6 +8,8 @@ var factorial = function(n, product = 1) {
   // base
   if(n === 0 || n === 1){
     return product;
+  } else if( n < 0){
+    null;
   }
   // recursion
   product *= n;
