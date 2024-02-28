@@ -52,10 +52,8 @@ var isEven = function(n) {
   if(n === 0){
     return true;
   } else {
-    return false;
+    return isEven( n - 2);
   }
-  return isEven(n - 2);
-
 };
 
 // 5. Sum all integers below a given integer.
