@@ -45,7 +45,7 @@ var arraySum = function(array, output = 0) {
 // 4. Check if a number is even.
 var isEven = function(n) {
   // base
-  if(n === 1){
+  if(n === 1 || n === - 1){
     return false
   }
   if(n === 0){
