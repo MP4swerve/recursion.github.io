@@ -45,15 +45,14 @@ var arraySum = function(array, output = 0) {
 // 4. Check if a number is even.
 var isEven = function(n) {
   // base
-  if(typeof n === 'number'){
-    return n - 2;
+  if(n === 1){
+    return false
   }
-  // recursion
   if(n === 0){
     return true;
-  } else {
-    return false;
   }
+  // recursion
+  return isEven(n - 2);
 };
 
 // 5. Sum all integers below a given integer.
