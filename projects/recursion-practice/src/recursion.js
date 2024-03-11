@@ -82,7 +82,7 @@ var sumBelow = function(n, sum = 0) {
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y) {
  //base
-  if (x === y || y === x - 1) {
+  if (x + 1 === y || x - 1 === y) {
     return [];
   } else if (x < y) {
     // Recursion
