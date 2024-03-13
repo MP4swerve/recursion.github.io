@@ -361,6 +361,13 @@ var flatten = function(arrays) {
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
 var letterTally = function(str, obj) {
+  if (index === str.length) {
+    return obj;
+}
+//recursion
+var char = str[index];
+obj[char] = (obj[char] || 0) + 1;
+return letterTally(str, obj, index + 1);
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -391,6 +398,15 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  //base
+  if (index === array.length) {
+    return result;
+}
+//recursion
+if (array[index] !== 0 || index === 0 || array[index - 1] !== 0) {
+    result.push(array[index]);
+}
+return minimizeZeroes(array, index + 1, result);
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -398,12 +414,39 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  //base
+  if (index === array.length) {
+    return array;
+}
+//recursion
+if (index % 2 === 0) {
+    array[index] = Math.abs(array[index]);
+} else {
+    array[index] = -Math.abs(array[index]);
+}
+return alternateSign(array, index + 1);
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  //base
+  if (index === str.length) {
+    return result;
+}
+
+// Get the current character
+var char = str[index];
+//recursion
+if (/[0-9]/.test(char)) {
+    var numWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    var digitWord = numWords[parseInt(char)];
+    result += digitWord;
+} else {
+    result += char;
+}
+return numToText(str, index + 1, result);
 };
 
 // *** EXTRA CREDIT ***
