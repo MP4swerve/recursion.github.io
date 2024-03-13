@@ -100,21 +100,53 @@ var range = function(x, y) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  //base
+  if (exp === 0) {
+    return 1;
+} 
+//recursion
+if (exp < 0) {
+  return 1 / exponent(base, -exp);
+  } else {
+  return base * exponent(base, exp - 1);
+    }
 };
-
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n === 1) {
+    return true;
+} 
+// If n is less than 1 or odd, it's not a power of two
+if (n < 1 || n % 2 !== 0) {
+    return false;
+} else {
+    return powerOfTwo(n / 2);
+}
 };
+
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function(string) {
+ //base
+  if (string.length <= 1) {
+    return string;
+} 
+//recursion
+return string[string.length - 1] + reverse(string.substring(0, string.length - 1));
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  string = string.replace(/\s/g, '').toLowerCase();
+  //base
+  if (string.length <= 1) {
+    return true;
+} 
+// recursion
+return string[0] === string[string.length - 1] && palindrome(string.substring(1, string.length - 1));
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -129,6 +161,16 @@ var modulo = function(x, y) {
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y) {
+ //base
+ if (y === 0) {
+  return 0;
+} 
+// recursion
+if (y > 0) {
+  return x + multiply(x, y - 1);
+} else {
+  return -multiply(x, -y);
+}
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
@@ -150,32 +192,83 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+   // Base 
+   if (str1 === '' && str2 === '') {
+    return true;
+}
+if (str1 === '' || str2 === '') {
+    return false;
+}
+// recursion
+if (str1[0] === str2[0]) {
+    return compareStr(str1.slice(1), str2.slice(1));
+}
+// If the first characters don't match, strings are not identical
+return false;
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function(str){
+  //base 
+  if (str === '') {
+    return [];
+}
+// Recursion
+return [str[0]].concat(createArray(str.slice(1)));
 };
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
+  //base
+  if (array.length <= 1) {
+    return array;
+}
+// recursion
+let temp = array[0];
+array[0] = array[array.length - 1];
+array[array.length - 1] = temp;
+return [array[0]].concat(reverseArr(array.slice(1, -1))).concat([array[array.length - 1]]);
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+    // Base 
+    if (length === 0) {
+      return [];
+  }
+  // Recursion
+  return [value].concat(buildList(value, length - 1));
 };
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value) {
+   // Base 
+   if (array.length === 0) {
+    return 0;
+}
+// recursion
+if (array[0] === value) {
+    return 1 + countOccurrence(array.slice(1), value); // Move to the next element recursively
+} else {
+    return countOccurrence(array.slice(1), value); // Move to the next element recursively
+}
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
+   // Base 
+   if (array.length === 0) {
+    return [];
+}
+const mappedElement = callback(array[0]);
+// Recursion
+return [mappedElement].concat(rMap(array.slice(1), callback));
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -211,17 +304,41 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+   // Base 
+   if (n === 0) {
+    return 0;
+} else if (n === 1) {
+    return 1;
+} else if(n < 0){
+  return null;
+}
+// Recursion
+return nthFibo(n - 1) + nthFibo(n - 2);
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(input) {
+      // Base 
+      if (input.length === 0) {
+        return [];
+    }
+    // recursion
+    return [input[0].toUpperCase()].concat(capitalizeWords(input.slice(1)));
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function(array) {
+  // Base 
+  if (array.length === 0) {
+    return [];
+}
+// recursion
+const firstWord = array[0];
+const capitalizedFirstWord = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
+return [capitalizedFirstWord].concat(capitalizeFirst(array.slice(1)));
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -252,6 +369,16 @@ var letterTally = function(str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function(list) {
+  // Base 
+  if (list.length === 0) {
+    return [];
+}
+// recursion
+if (list[0] === list[1]) {
+    return compress(list.slice(1));
+}  else {
+    return [list[0]].concat(compress(list.slice(1)));
+}
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
