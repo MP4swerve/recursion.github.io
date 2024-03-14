@@ -82,15 +82,14 @@ var sumBelow = function(n, sum = 0) {
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y) {
  //base
-  if (x + 1 === y || x - 1 === y) {
-    return [];
-  } else if (x < y) {
-    // Recursion
-    return [x + 1].concat(range(x + 1, y));
-  } else {
-    // Recursion
-    return [x - 1].concat(range(x - 1, y));
-  }
+ if (Math.abs(x - y) <= 1) {
+  return [];
+} else if (x < y) {
+  // Recursion for increasing range
+  return [x + 1].concat(range(x + 1, y));
+} else {
+  return [x - 1].concat(range(x - 1, y));
+}
 };
 
 
@@ -164,11 +163,12 @@ var multiply = function(x, y) {
  //base
  if (y === 0) {
   return 0;
-} 
-// recursion
-if (y > 0) {
+}
+// Recursion: If y is positive, add x to the result of multiplying x by y-1
+else if (y > 0) {
   return x + multiply(x, y - 1);
-} else {
+}
+else {
   return -multiply(x, -y);
 }
 };
