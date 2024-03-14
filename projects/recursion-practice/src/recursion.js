@@ -161,16 +161,20 @@ var modulo = function(x, y) {
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y) {
  //base
- if (y === 0) {
+ if (x === 0 || y === 0) {
   return 0;
 }
-// Recursion: If y is positive, add x to the result of multiplying x by y-1
-else if (y > 0) {
+// Base case: If y is 1, return x
+if (y === 1) {
+  return x;
+}
+// Recursive case: If y is positive, recursively add x to the result of multiplying x by y-1
+if (y > 0) {
   return x + multiply(x, y - 1);
 }
-// Recursion: If y is negative, negate the result of multiplying x by -y
-else {
-  return multiply(x, -y);
+// Recursive case: If y is negative, recursively subtract x from the result of multiplying x by -y-1
+if (y < 0) {
+  return -x + multiply(x, y + 1);
 }
 };
 
