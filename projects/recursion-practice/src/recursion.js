@@ -170,7 +170,7 @@ else if (y > 0) {
 }
 // Recursion: If y is negative, negate the result of multiplying x by -y
 else {
-  return -multiply(x, -y);
+  return multiply(x, -y);
 }
 };
 
