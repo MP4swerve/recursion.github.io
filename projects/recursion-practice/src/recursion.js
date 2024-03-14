@@ -168,6 +168,7 @@ var multiply = function(x, y) {
 else if (y > 0) {
   return x + multiply(x, y - 1);
 }
+// Recursion: If y is negative, negate the result of multiplying x by -y
 else {
   return -multiply(x, -y);
 }
